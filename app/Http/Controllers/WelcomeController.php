@@ -1,5 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+
+use Illuminate\Http\Request;
+use Validator;
+
 class WelcomeController extends Controller {
 
 	/*
@@ -30,7 +34,8 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('welcome');
+		$questions = \App\Question::where('status','=','pending')->orderBy('votes','desc')->get();
+		return view('users.stream')->with('questions',$questions);
 	}
 
 	/**
@@ -40,17 +45,18 @@ class WelcomeController extends Controller {
 	 */
 	public function stream()
 	{
-		return 'Stream';//view('welcome');
+		$questions = \App\Question::where('status','=','pending')->orderBy('votes','desc')->get();
+		return $questions;//view('welcome');
 	}
 
 	/**
-	 * handling newly posted question.
+	 * creating an new question.
 	 *
 	 * @return Response
 	 */
 	public function getQuestion()
 	{
-		return 'Form Posting New Question';//view('welcome');
+		return view('users.postQuestion');
 	}
 
 	/**
@@ -58,9 +64,25 @@ class WelcomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function postQuestion()
+	public function postQuestion(Request $request)
 	{
-		return 'Handling Posting New Question';//view('welcome');
+		$validate = Validator::make($request->all(), [
+	        'question' => 'required|max:200',
+	        'from' => 'required',
+	        'to' => 'required',
+	    ]);
+
+	    if($validate->passes()){
+	    	$createQuestion = new \App\Question();
+			$createQuestion->content = $request->input('question');
+			$createQuestion->to = $request->input('to');
+			$createQuestion->from = $request->input('from');
+			$createQuestion->status = "pending";
+	    }
+	    else {
+	    	return redirect()->back();
+	    }
+		return $createQuestion;
 	}
 
 }
