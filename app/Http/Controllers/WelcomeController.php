@@ -88,6 +88,7 @@ class WelcomeController extends Controller {
 				$createQuestion->to = $request->input('to');
 				$createQuestion->from = $request->input('from');
 				$createQuestion->status = "pending";
+				$createQuestion->votes = 1;
 				$createQuestion->save();
 				return redirect()->back();
 		  }

@@ -11,19 +11,21 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+
 Route::get('moderator', 'ModeratorController@index');
 Route::get('moderator/answering/{id}', 'ModeratorController@answering');
-Route::get('stream', 'WelcomeController@stream');
-// preceeding line to be commented out later
+Route::get('moderator/set/pending/{id}', 'ModeratorController@setPending');
+Route::get('moderator/set/answered/{id}', 'ModeratorController@setAnswered');
+Route::get('moderator/set/notanswered/{id}', 'ModeratorController@setNotanswered');
+
+// User section routings
+Route::get('/', 'WelcomeController@index');
 Route::get('questions', 'WelcomeController@getQuestion');
 Route::get('archives', 'WelcomeController@archives');
 Route::get('upvote/{id}', 'WelcomeController@getUpvote');
-
-Route::get('home', 'HomeController@index');
-
 Route::post('question', 'WelcomeController@postQuestion');
 
+// auth controlers for admin
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
