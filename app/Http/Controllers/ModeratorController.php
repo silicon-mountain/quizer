@@ -30,7 +30,14 @@ class ModeratorController extends Controller {
 	 */
 	public function index()
 	{
-		return "moderator";
+		$questions = \App\Question::where('status','=','pending')->orderBy('votes','desc')->get();
+		return view('moderator.index')->with('questions',$questions);
+	}
+
+	public function answering($id)
+	{
+		$question = \App\Question::find($id);
+		return $question;
 	}
 
 }

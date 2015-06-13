@@ -33,16 +33,18 @@
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
   </head>
-<style>
-   .box-sm{
-         background: none repeat scroll 0% 0% #FFF;
+
+  <style>
+
+  .box-sm{
+	       background: none repeat scroll 0% 0% #FFF;
     width: 15px;
     float: right;
     border: 2px solid rgb(197, 233, 103);
     border-radius: 3px;
     height: 15px;
 }
-  
+
   </style>
 
 
@@ -53,7 +55,7 @@
  <nav class="navbar navbar-inverse navbar-fixed-top palette-emerald" role="navigation">
             <div class="navbar-header">
 
-           <a href="{{URL::to('archives')}}"> <div style="height: 30px; position: fixed; right: 20px; margin-top: 12px; width: 30px;">
+           <a href="#"> <div style="height: 30px; position: fixed; right: 20px; margin-top: 12px; width: 30px;">
 
             	<div style="" class="box-sm"></div>
                 <div style="" class="box-sm"></div>
@@ -62,7 +64,7 @@
                 <div style="" class="box-sm"></div>
             </div>
               </a>
-              <a class="navbar-brand" href="{{URL::to('/')}}">Quizer</a>
+              <a class="navbar-brand" href="#">Quizer</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-01">
 
@@ -76,7 +78,7 @@
          <div style="margin-top: 53px; background:#FFF; padding-bottom:20px" class="navbar-fixed-top">
 
           <!--- Most voted question---->
-          <dl class="palette palette-nephritis-main">  
+          <dl class="palette palette-nephritis-main">
               <dt>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</dt>
               <dd style="color: white; position: relative; top: 49px; height: 44px; width: 54px;opacity:1">
 
@@ -90,12 +92,12 @@
 
       </div>
       
-    	<div style="margin-top:300px; margin-bottom:50px;" id="question-list" class="file-list" ng-cloak ng-controller="QuestionListController as questionList">
+    	<div style="margin-top:300px;" id="question-list" class="file-list" ng-cloak ng-controller="QuestionListController as questionList">
     <!---Questions---->
 					<div id="question-layout-container" class="question-layout-container">
 						<div class="question-row" ng-repeat="question in questionList.questions | orderBy:'votes':true" >
 
-							<dl class="palette palette-nephritis" style="margin-bottom:100px">
+							<dl class="palette palette-nephritis" style="margin-bottom:50px">
 	              <dt> <% question.content %></dt>
 
 	              <dd style="color: white; position: relative; top: 49px; height: 44px; width: 54px;opacity:1">
@@ -147,7 +149,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-danger pull-left" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">CANCEL</button>
+        <button type="button" class="btn btn-sm btn-default pull-right" data-dismiss="modal">SEND</button>
       </div>
     </div>
   </div>
