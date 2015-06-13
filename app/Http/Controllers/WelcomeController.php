@@ -28,7 +28,7 @@ class WelcomeController extends Controller {
 	}
 
 	/**
-	 * Show the application welcome screen to the user.
+	 * Show the application welcome screen to the user i.e the stream of questions sorted by votes.
 	 *
 	 * @return Response
 	 */
@@ -39,14 +39,14 @@ class WelcomeController extends Controller {
 	}
 
 	/**
-	 * show stream of questions.
+	 * viewing question archives.
 	 *
 	 * @return Response
 	 */
-	public function stream()
+	public function archives()
 	{
 		$questions = \App\Question::where('status','=','pending')->orderBy('votes','desc')->get();
-		return $questions;//view('welcome');
+		return view('users.archive')->with('questions',$questions);
 	}
 
 	/**
