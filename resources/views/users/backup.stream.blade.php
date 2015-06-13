@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
-    <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
+    <link href="{{URL::to('assets')}}/css/vendor/bootstrap.min.css" rel="stylesheet">
 
     <!-- Loading Flat UI -->
-    <link href="css/flat-ui.min.css" rel="stylesheet">
+    <link href="{{URL::to('assets')}}/css/flat-ui.min.css" rel="stylesheet">
 
    <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
 
@@ -43,45 +43,33 @@
           
           <!--- Most voted question---->
           <dl class="palette palette-nephritis">
-              <dt>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</dt>
-              <dd style="float:right;">-to ACTIVSPACES</dd>
+              <dt>Answering Question</dt>
+              <dd style="float:right;">TO >></dd>
             </dl>
          
       </div>
       <div style="margin-top:220px;">
-      <!---Questions---->
+      <!---Questions -->
+      @foreach($questions as $question)
           <dl class="palette palette-nephritis">
-              <dt>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. </dt>
-              <dd style="float:right;">-to PRESTB</dd>
+              <dt>{{$question->content}}</dt>
+              <dd style="float:right;">To >> {{$question->to}}</dd>
             </dl>
-            
-            
-            <dl class="palette palette-nephritis">
-              <dt>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</dt>
-              <dd style="float:right;">-to MUZISHIMA</dd>
-            </dl>
-            
-            
-            <dl class="palette palette-nephritis">
-              <dt>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet</dt>
-              <dd style="float:right;">-to TERANNO</dd>
-            </dl>
+      @endforeach
           
         </div>
        
       
     </div>
     
-    
-    
     <!-- /.container -->
 
 
     <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
-    <script src="js/vendor/jquery.min.js"></script>
+    <script src="{{URL::to('assets')}}/js/vendor/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/vendor/video.js"></script>
-    <script src="js/flat-ui.min.js"></script>
+    <script src="{{URL::to('assets')}}/js/vendor/video.js"></script>
+    <script src="{{URL::to('assets')}}/js/flat-ui.min.js"></script>
 
   </body>
 </html>

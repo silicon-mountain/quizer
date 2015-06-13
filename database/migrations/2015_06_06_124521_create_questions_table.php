@@ -12,9 +12,15 @@ class CreateQuestionsTable extends Migration {
 	 */
 	public function up()
 	{
+		// creating shema for questions table
 		Schema::create('questions', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('content');
+			$table->string('to');
+			$table->string('from')->nullable();
+			$table->integer('votes')->nullable();
+			$table->enum('status', array('pending','answered','notanswered'));
 			$table->timestamps();
 		});
 	}

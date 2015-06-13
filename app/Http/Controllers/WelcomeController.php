@@ -56,7 +56,17 @@ class WelcomeController extends Controller {
 	 */
 	public function getQuestion()
 	{
-		return view('users.postQuestion');
+		$questions = \App\Question::orderBy('created_at', 'DESC')->get()->toArray();
+		return response()->json($questions);
+	}
+
+	public function getUpvote($id) {
+		$question = \App\Question::find($id);
+		if ($question) {
+			$question->votes += 1;
+			$question->save();
+			return response()->json(['success' => true]);
+		}
 	}
 
 	/**
@@ -67,22 +77,24 @@ class WelcomeController extends Controller {
 	public function postQuestion(Request $request)
 	{
 		$validate = Validator::make($request->all(), [
-	        'question' => 'required|max:200',
+	        'content' => 'required|max:200',
 	        'from' => 'required',
 	        'to' => 'required',
 	    ]);
 
 	    if($validate->passes()){
 	    	$createQuestion = new \App\Question();
-			$createQuestion->content = $request->input('question');
-			$createQuestion->to = $request->input('to');
-			$createQuestion->from = $request->input('from');
-			$createQuestion->status = "pending";
-	    }
+				$createQuestion->content = $request->input('content');
+				$createQuestion->to = $request->input('to');
+				$createQuestion->from = $request->input('from');
+				$createQuestion->status = "pending";
+				$createQuestion->save();
+				return redirect()->back();
+		  }
 	    else {
 	    	return redirect()->back();
 	    }
-		return $createQuestion;
+		return redirect()->back();;
 	}
 
 }

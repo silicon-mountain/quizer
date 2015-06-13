@@ -12,13 +12,15 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('moderator', 'ModeratorController@index');
 Route::get('stream', 'WelcomeController@stream');
-// preceeding line to be commented out later 
-Route::get('question', 'WelcomeController@getQuestion');
-
-Route::post('question', 'WelcomeController@postQuestion');
+// preceeding line to be commented out later
+Route::get('questions', 'WelcomeController@getQuestion');
+Route::get('upvote/{id}', 'WelcomeController@getUpvote');
 
 Route::get('home', 'HomeController@index');
+
+Route::post('question', 'WelcomeController@postQuestion');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -1,0 +1,19 @@
+.navbar {
+  background-color: #afff58;
+  border: none; }
+
+.pointer {
+  cursor: pointer; }
+
+.box-sm {
+  background: none repeat scroll 0% 0% #FFF;
+  width: 15px;
+  float: right;
+  border: 2px solid #c5e967;
+  border-radius: 3px;
+  height: 15px; }
+
+.fui-plus {
+  color: #709E34; }
+
+/*# sourceMappingURL=app.css.map */
