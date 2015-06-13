@@ -24,20 +24,64 @@ class ModeratorController extends Controller {
 	// }
 
 	/**
-	 * Show the application dashboard to the user.
+	 * Show all questions sorted by votes descending order.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
+		//return gethostbyaddr($_SERVER['REMOTE_ADDR']);
 		$questions = \App\Question::where('status','=','pending')->orderBy('votes','desc')->get();
 		return view('moderator.index')->with('questions',$questions);
 	}
-
+	/**
+	 * Question which is currently being answered.
+	 *
+	 * @return Response
+	 */
 	public function answering($id)
 	{
 		$question = \App\Question::find($id);
-		return $question;
+		return view('moderator.question')->with('question',$question);
+	}
+
+	/**
+	 * Setting question to pending state if not answered. and will be revisisted
+	 *
+	 * @return Response
+	 */
+	public function setPending($id)
+	{
+		$question = \App\Question::find($id);
+		$question->status = "pending";
+		$question->save();
+		return redirect()->to('moderator');
+	}
+
+	/**
+	 * Setting question to answered.
+	 *
+	 * @return Response
+	 */
+	public function setAnswered($id)
+	{
+		$question = \App\Question::find($id);
+		$question->status = "answered";
+		$question->save();
+		return redirect()->to('moderator');
+	}
+
+	/**
+	 * Setting question to not answered, if question wasnt answered.
+	 *
+	 * @return Response
+	 */
+	public function setNotanswered($id)
+	{
+		$question = \App\Question::find($id);
+		$question->status = "notanswered";
+		$question->save();
+		return redirect()->to('moderator');
 	}
 
 }

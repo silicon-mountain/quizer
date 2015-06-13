@@ -35,7 +35,8 @@ class RedirectIfAuthenticated {
 	{
 		if ($this->auth->check())
 		{
-			return new RedirectResponse(url('/home'));
+			//return new RedirectResponse(url('/moderator'));
+			return redirect()->to('moderator');
 		}
 
 		return $next($request);
