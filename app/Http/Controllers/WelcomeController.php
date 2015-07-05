@@ -3,6 +3,7 @@
 
 use Illuminate\Http\Request;
 use Validator;
+use Session;
 
 class WelcomeController extends Controller {
 
@@ -25,6 +26,9 @@ class WelcomeController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('guest');
+		if(!Session::has('user')){
+			Session::put('user', uniqid());
+		}
 	}
 
 	/**
@@ -34,6 +38,7 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
+		//return Session::all();
 		$questions = \App\Question::where('status','=','pending')->orderBy('votes','desc')->get();
 		return view('users.stream')->with('questions',$questions);
 	}
@@ -62,9 +67,21 @@ class WelcomeController extends Controller {
 
 	public function getUpvote($id) {
 		$question = \App\Question::find($id);
+		// count if user has alreqdy voted for question
+		$checkVoteStatus = \App\Check::where('session_id','=',Session::get('user'))->where('question_id','=',$id)->count();
 		if ($question) {
+			if($checkVoteStatus >= 1)
+				// if user has voted return a failed upvote response
+				return response()->json(['success' => false]);
 			$question->votes += 1;
 			$question->save();
+
+			// saving session for checking users
+			$checker = new \App\Check();
+			$checker->question_id = $id;
+			$checker->session_id = Session::get('user');
+			$checker->save();
+
 			return response()->json(['success' => true]);
 		}
 	}
